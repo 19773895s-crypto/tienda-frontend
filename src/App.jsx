@@ -8,9 +8,26 @@ function App() {
 
   return (
     <div>
-      <h1>Tienda de Electrónicos</h1>
-      <FormularioVenta onVentaRegistrada={() => setRecarga(recarga + 1)} />
-      <ListaVentas recarga={recarga} />
+      <header className="encabezado">
+        <div className="encabezado-contenido">
+          <div className="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M13 2 4 14h6l-1 8 9-12h-6z" />
+            </svg>
+          </div>
+          <div>
+            <h1>TecnoStore</h1>
+            <p>Sistema de ventas de electrónicos</p>
+          </div>
+        </div>
+      </header>
+
+      <main className="contenedor">
+        <FormularioVenta onVentaRegistrada={() => setRecarga(recarga + 1)} />
+        <ListaVentas recarga={recarga} />
+      </main>
+
+      <footer className="pie">TecnoStore · Proyecto de Desarrollo de Software</footer>
     </div>
   );
 }

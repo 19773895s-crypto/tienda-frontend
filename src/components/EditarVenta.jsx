@@ -45,33 +45,47 @@ function EditarVenta({ venta, onUpdate }) {
   return (
     <div>
       <h3>Editar venta #{venta.id}</h3>
-      <form onSubmit={handleSubmit}>
-        <select name="vendedor_id" value={formData.vendedor_id}
-                onChange={handleChange} required>
-          {vendedores.map(v => (
-            <option key={v.id} value={v.id}>
-              {v.nombre} - {v.sucursal}
-            </option>
-          ))}
-        </select>
+      <p className="ayuda">Corrige los datos y guarda los cambios.</p>
 
-        <select name="producto_id" value={formData.producto_id}
-                onChange={handleChange} required>
-          {productos.map(p => (
-            <option key={p.id} value={p.id}>
-              {p.nombre} - ${p.precio}
-            </option>
-          ))}
-        </select>
+      <form className="formulario" onSubmit={handleSubmit}>
+        <label className="campo">
+          Vendedor
+          <select name="vendedor_id" value={formData.vendedor_id}
+                  onChange={handleChange} required>
+            {vendedores.map(v => (
+              <option key={v.id} value={v.id}>
+                {v.nombre} - {v.sucursal}
+              </option>
+            ))}
+          </select>
+        </label>
 
-        <input type="number" name="cantidad" min="1"
-               value={formData.cantidad}
-               onChange={handleChange} required />
+        <label className="campo">
+          Producto
+          <select name="producto_id" value={formData.producto_id}
+                  onChange={handleChange} required>
+            {productos.map(p => (
+              <option key={p.id} value={p.id}>
+                {p.nombre} - ${p.precio}
+              </option>
+            ))}
+          </select>
+        </label>
 
-        <input type="date" name="fecha" value={formData.fecha}
-               onChange={handleChange} required />
+        <label className="campo">
+          Cantidad
+          <input type="number" name="cantidad" min="1"
+                 value={formData.cantidad}
+                 onChange={handleChange} required />
+        </label>
 
-        <button type="submit">Actualizar Venta</button>
+        <label className="campo">
+          Fecha
+          <input type="date" name="fecha" value={formData.fecha}
+                 onChange={handleChange} required />
+        </label>
+
+        <button className="btn btn-primario" type="submit">Guardar cambios</button>
       </form>
     </div>
   );

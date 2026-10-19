@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../api';
 
+// Fecha de hoy en formato AAAA-MM-DD (hora local)
+const hoy = () => new Date().toLocaleDateString('en-CA');
+
 function FormularioVenta({ onVentaRegistrada }) {
   const [formData, setFormData] = useState({
     vendedor_id: '',
     producto_id: '',
     cantidad: '',
-    fecha: ''
+    fecha: hoy()
   });
 
   const [vendedores, setVendedores] = useState([]);
@@ -35,7 +38,7 @@ function FormularioVenta({ onVentaRegistrada }) {
     api.post('/ventas', formData)
       .then(res => {
         alert(res.data.message);
-        setFormData({ vendedor_id: '', producto_id: '', cantidad: '', fecha: '' });
+        setFormData({ vendedor_id: '', producto_id: '', cantidad: '', fecha: hoy() });
         onVentaRegistrada(); // avisa a App para que la tabla se actualice
       })
       .catch(err => {
@@ -45,39 +48,52 @@ function FormularioVenta({ onVentaRegistrada }) {
   };
 
   return (
-    <div>
-      <h2>Registrar Nueva Venta</h2>
-      <form onSubmit={handleSubmit}>
-        <select name="vendedor_id" value={formData.vendedor_id}
-                onChange={handleChange} required>
-          <option value="">Seleccione vendedor</option>
-          {vendedores.map(v => (
-            <option key={v.id} value={v.id}>
-              {v.nombre} - {v.sucursal}
-            </option>
-          ))}
-        </select>
+    <aside className="formulario-tarjeta">
+      <h2>Registrar venta</h2>
+      <p className="ayuda">Elige quién vendió, qué producto y cuántas unidades.</p>
 
-        <select name="producto_id" value={formData.producto_id}
-                onChange={handleChange} required>
-          <option value="">Seleccione producto</option>
-          {productos.map(p => (
-            <option key={p.id} value={p.id}>
-              {p.nombre} - ${p.precio}
-            </option>
-          ))}
-        </select>
+      <form className="formulario" onSubmit={handleSubmit}>
+        <label className="campo">
+          Vendedor
+          <select name="vendedor_id" value={formData.vendedor_id}
+                  onChange={handleChange} required>
+            <option value="">Selecciona un vendedor</option>
+            {vendedores.map(v => (
+              <option key={v.id} value={v.id}>
+                {v.nombre} - {v.sucursal}
+              </option>
+            ))}
+          </select>
+        </label>
 
-        <input type="number" name="cantidad" placeholder="Cantidad"
-               min="1" value={formData.cantidad}
-               onChange={handleChange} required />
+        <label className="campo">
+          Producto
+          <select name="producto_id" value={formData.producto_id}
+                  onChange={handleChange} required>
+            <option value="">Selecciona un producto</option>
+            {productos.map(p => (
+              <option key={p.id} value={p.id}>
+                {p.nombre} - ${p.precio}
+              </option>
+            ))}
+          </select>
+        </label>
 
-        <input type="date" name="fecha" value={formData.fecha}
-               onChange={handleChange} required />
+        <label className="campo">
+          Cantidad
+          <input type="number" name="cantidad" placeholder="Ej. 2" min="1"
+                 value={formData.cantidad} onChange={handleChange} required />
+        </label>
 
-        <button type="submit">Registrar Venta</button>
+        <label className="campo">
+          Fecha
+          <input type="date" name="fecha" value={formData.fecha}
+                 onChange={handleChange} required />
+        </label>
+
+        <button className="btn btn-primario" type="submit">Registrar venta</button>
       </form>
-    </div>
+    </aside>
   );
 }
 
