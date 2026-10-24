@@ -1,0 +1,83 @@
+/* Estilos de la vista de tienda. Usa las variables de index.css */
+
+.encabezado-contenido { flex-wrap: wrap; }
+.nav { margin-left: auto; display: flex; gap: 6px; }
+.nav button {
+  font: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  color: #c4cee6; background: transparent; border: 0; border-radius: 10px; padding: 9px 16px;
+}
+.nav button:hover { background: rgba(255, 255, 255, 0.08); }
+.nav button.activo { background: #fff; color: var(--tinta); }
+.nav button:focus-visible { outline: 3px solid var(--etiqueta); outline-offset: 2px; }
+
+a.btn { display: inline-block; text-decoration: none; }
+.btn-claro { background: #fff; color: var(--azul); }
+.btn-claro:hover { background: var(--azul-suave); }
+
+.tienda { max-width: 1180px; margin: 0 auto; padding: 0 24px 40px; }
+.promo {
+  background: var(--etiqueta); color: var(--tinta); text-align: center;
+  font-size: 0.85rem; font-weight: 600; padding: 8px 12px; margin: 0 -24px;
+}
+
+/* Banner principal */
+.hero {
+  margin-top: 24px; background: var(--azul); color: #fff; border-radius: 20px;
+  padding: 40px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center;
+}
+.hero h2 { font-size: 2.1rem; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 12px; }
+.hero-texto p { color: #dbe4ff; max-width: 46ch; margin-bottom: 22px; }
+.hero-destacado {
+  background: #fff; color: var(--tinta); border-radius: 16px; padding: 22px;
+  display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center;
+}
+.hero-destacado .btn { grid-column: 1 / -1; }
+.hero-destacado small { color: var(--suave); font-size: 0.8rem; }
+.hero-destacado h3 { font-size: 1.05rem; font-weight: 600; margin: 2px 0 10px; }
+.hero-destacado .etiqueta { display: inline-block; padding: 8px 16px 8px 38px; }
+.hero-destacado .etiqueta::before { left: 13px; background: #fff; }
+.hero-destacado .etiqueta strong { font-size: 1.4rem; }
+.hero-icono { font-size: 3.4rem; width: 84px; height: 84px; display: grid; place-items: center; background: var(--fondo); border-radius: 16px; }
+
+/* Catálogo */
+.catalogo { margin-top: 36px; scroll-margin-top: 16px; }
+.catalogo-barra { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.catalogo h2, .recientes h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
+.buscador {
+  font: inherit; font-size: 0.95rem; width: 260px; max-width: 100%; padding: 10px 14px;
+  border: 1px solid var(--linea); border-radius: 999px; background: #fff; color: var(--tinta);
+}
+.buscador:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px var(--azul-suave); }
+.categorias { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.chip {
+  font: inherit; font-size: 0.85rem; font-weight: 500; cursor: pointer; padding: 7px 16px;
+  border-radius: 999px; border: 1px solid var(--linea); background: #fff; color: var(--suave);
+}
+.chip:hover { border-color: var(--azul); color: var(--azul); }
+.chip.activo { background: var(--tinta); border-color: var(--tinta); color: #fff; }
+
+.productos { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+.producto {
+  background: #fff; border: 1px solid var(--linea); border-radius: 16px; padding: 16px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.producto-imagen { font-size: 3.6rem; height: 130px; display: grid; place-items: center; background: var(--fondo); border-radius: 12px; margin-bottom: 6px; }
+.producto-categoria { font-size: 0.78rem; color: var(--suave); }
+.producto h3 { font-size: 1rem; font-weight: 600; line-height: 1.3; min-height: 2.6em; }
+.producto-precio { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin: 4px 0 8px; }
+.producto .btn { margin-top: auto; }
+
+/* Ventas recientes */
+.recientes { margin-top: 44px; }
+.recientes h2 { margin-bottom: 14px; }
+
+/* Ventana de compra */
+.resumen-compra { display: flex; justify-content: space-between; align-items: center; background: var(--fondo); border-radius: 10px; padding: 12px 14px; }
+.resumen-compra small { color: var(--suave); font-size: 0.85rem; }
+.resumen-compra strong { font-size: 1.3rem; }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: 28px; }
+  .hero h2 { font-size: 1.7rem; }
+  .nav { margin-left: 0; width: 100%; }
+}

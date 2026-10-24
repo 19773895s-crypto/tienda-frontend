@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import './tienda.css';
+import Tienda from './components/Tienda';
 import ListaVentas from './components/ListaVentas';
 import FormularioVenta from './components/FormularioVenta';
 
 function App() {
+  const [vista, setVista] = useState('tienda');
   // Cada vez que se registra una venta, este número sube y la tabla se vuelve a cargar
   const [recarga, setRecarga] = useState(0);
 
@@ -17,15 +20,23 @@ function App() {
           </div>
           <div>
             <h1>TecnoStore</h1>
-            <p>Sistema de ventas de electrónicos</p>
+            <p>Tecnología al mejor precio</p>
           </div>
+          <nav className="nav">
+            <button className={vista === 'tienda' ? 'activo' : ''} onClick={() => setVista('tienda')}>Tienda</button>
+            <button className={vista === 'panel' ? 'activo' : ''} onClick={() => setVista('panel')}>Panel de ventas</button>
+          </nav>
         </div>
       </header>
 
-      <main className="contenedor">
-        <FormularioVenta onVentaRegistrada={() => setRecarga(recarga + 1)} />
-        <ListaVentas recarga={recarga} />
-      </main>
+      {vista === 'tienda' ? (
+        <Tienda />
+      ) : (
+        <main className="contenedor">
+          <FormularioVenta onVentaRegistrada={() => setRecarga(recarga + 1)} />
+          <ListaVentas recarga={recarga} />
+        </main>
+      )}
 
       <footer className="pie">TecnoStore · Proyecto de Desarrollo de Software</footer>
     </div>
